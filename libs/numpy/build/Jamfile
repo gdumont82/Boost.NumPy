@@ -9,7 +9,7 @@ if [ python.configured ]
 {
 
 project boost/numpy
-  : source-location .
+  : source-location ../src
 #  : requirements
   ;
 
@@ -37,10 +37,11 @@ lib boost_numpy
     matrix.cpp
     ufunc.cpp
     numpy.cpp
+    ../../python/build//boost_python
   : # requirements
     <library>/python//python_for_extensions
     #<library>/boost/python//boost_python
-    <library>boost_python
+    #<library>boost_python
     <conditional>@numpy-includes
   : # default build
     <link>shared

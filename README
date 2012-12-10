@@ -26,7 +26,25 @@ to use the "--with-boost*" options (see "scons --help") to specify
 where to find Boost.  The Python that is used by SCons will
 be the one built against.
 
-
+INSTALLATION ON WINDOWS (tested with msvc 2010 and boost 1.52.0)
+To install on windows we will use the boost build script. The idea is to 
+patch a boost install with the boost numpy library as if it was included 
+in boost.
+	
+	1. Download boost and extract to say c:\boost	
+	2. cd c:\boost	
+	3. call bootstrap.bat	
+	4. copy the libs\numpy directory in c:\boost\libs
+	5. copy the boost\numpy.hpp and boost\numpy in c:\boost\boost
+	6. call:
+	   bjam bjam --with-python --with-numpy variant=debug,release 
+	   link=static include=C:\Python27\Lib\site-packages\numpy\core\include stage
+	   The include for the numpy includes might not be necessary as the jamscript 
+	   is supposed to detect the headers location automatically. NOTE: link=static
+	   is required on windows since there are no exported symbols in boost numpy.
+	7. The generated static libraries will be located in the c:\boost\stage.
+	   
+	
 DOCUMENTATION
 
 More documentation on how to use the library can be found in
